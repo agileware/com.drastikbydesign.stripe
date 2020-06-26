@@ -482,7 +482,8 @@ CRM.$(function($) {
         return false;
       }
 
-      if (!(typeof grecaptcha === 'undefined' || (grecaptcha && grecaptcha.getResponse().length !== 0))) {
+      var recaptchaNotOnForm = CRM.$(event.target.form).find('#g-recaptcha-response').length <= 0;
+      if (!(typeof grecaptcha === 'undefined' || recaptchaNotOnForm || (grecaptcha && grecaptcha.getResponse().length !== 0))) {
         debugging('recaptcha active and not valid');
         $('div#card-errors').hide();
         swalFire({
